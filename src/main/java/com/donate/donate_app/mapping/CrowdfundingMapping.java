@@ -8,7 +8,6 @@ import com.donate.donate_app.response.CrowdfundingResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Component
@@ -19,7 +18,7 @@ public class CrowdfundingMapping {
 
     public Crowdfunding DtoToCrowdfunding(CrowdfundingDTO data){
         Users users = usersRepository.findById(data.getUsers_id()).orElseThrow();
-        BigDecimal goal_amount = BigDecimal.valueOf(0);
+        Integer goal_amount = 0;
         if (data.getGoal_amount()!=null){
             goal_amount = data.getGoal_amount();
         }

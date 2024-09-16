@@ -1,14 +1,13 @@
 package com.donate.donate_app.DTO;
 
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
 
 public class CrowdfundingDTO {
     private String description;
     private Long users_id;
-    private BigDecimal goal_amount;
+    private Integer goal_amount;
 
-    public CrowdfundingDTO(String description, Long users_id, BigDecimal goal_amount) {
+    public CrowdfundingDTO(String description, Long users_id, Integer goal_amount) {
         this.description = description;
         this.users_id = users_id;
         this.goal_amount = goal_amount;
@@ -33,11 +32,11 @@ public class CrowdfundingDTO {
         this.users_id = users_id;
     }
 
-    public BigDecimal getGoal_amount() {
+    public Integer getGoal_amount() {
         return goal_amount;
     }
 
-    public void setGoal_amount(BigDecimal goal_amount) {
+    public void setGoal_amount(Integer goal_amount) {
         this.goal_amount = goal_amount;
     }
 }

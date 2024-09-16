@@ -31,7 +31,14 @@ public class CrowdfundingController {
         Crowdfunding crowdfunding = crowdfundingMapping.DtoToCrowdfunding(data);
         createCrowdfunding.CreateCrowdfunding(crowdfunding);
     }
+
     @GetMapping
+    public List<CrowdfundingResponse> searchCrowdfundingAll(){
+        List<CrowdfundingResponse> response = crowdfundingMapping.ListCrowdfundingToResponse(searchCrowdfunding.SearchCrowdfundingAll());
+        return response;
+    }
+
+    @GetMapping("/byid")
     public CrowdfundingResponse searchCrowdfundingById(@RequestParam Long id){
         CrowdfundingResponse response = crowdfundingMapping.CrowdfundingToResponse(searchCrowdfunding.SearchCrowdfundingById(id));
         return response;

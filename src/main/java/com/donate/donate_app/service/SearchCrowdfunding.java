@@ -23,4 +23,9 @@ public class SearchCrowdfunding {
         return response;
     }
 
+    public List<Crowdfunding> SearchCrowdfundingAll(){
+        List<Crowdfunding> response = crowdfundingRepository.findAll();
+        return response;
+    }
+
 }

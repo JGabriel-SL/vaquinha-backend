@@ -3,7 +3,7 @@ id SERIAL PRIMARY KEY,
 description TEXT NOT NULL,
 created_at TIMESTAMP NOT NULL,
 users_id INTEGER NOT NULL,
-current_amount NUMERIC NOT NULL,
+current_amount INTEGER NOT NULL,
 goal_amount NUMERIC NOT NULL,
 FOREIGN KEY (users_id) REFERENCES users(id) ON DELETE CASCADE
 )
