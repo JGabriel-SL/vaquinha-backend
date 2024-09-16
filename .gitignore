@@ -3,6 +3,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+/Users/joaovitor/Documents/programação/donate-app/src/main/java/com/donate/donate_app/donate-app-33f84-firebase-adminsdk-p2cqc-6ba7742e65.json
 
 ### STS ###
 .apt_generated
