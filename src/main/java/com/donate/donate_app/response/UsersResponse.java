@@ -1,25 +1,19 @@
-package com.donate.donate_app.entity;
+package com.donate.donate_app.response;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "users")
-public class Users {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UsersResponse {
     private Long id;
     private String name;
     private String email;
     private String auth_id;
 
-    public Users(Long id, String name, String email, String auth_id) {
+    public UsersResponse(Long id, String name, String email, String auth_id) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.auth_id = auth_id;
     }
-    public Users() {
 
+    public UsersResponse() {
     }
 
     public Long getId() {
@@ -54,4 +48,3 @@ public class Users {
         this.auth_id = auth_id;
     }
 }
-

@@ -13,6 +13,7 @@ public class PaymentMapping {
         paymentResponse.setCrowdfunding_id(data.getCrowdfunding_id().getId());
         paymentResponse.setType(data.getType());
         paymentResponse.setUrl(data.getUrl_payment());
+        paymentResponse.setId_payment(data.getId_payment());
 
         return paymentResponse;
     }

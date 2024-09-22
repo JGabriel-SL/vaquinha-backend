@@ -5,12 +5,14 @@ public class PaymentResponse {
     private Long crowdfunding_id;
     private String type;
     private String url;
+    private String id_payment;
 
-    public PaymentResponse(Integer amount, Long crowdfunding_id, String type, String url) {
+    public PaymentResponse(Integer amount, Long crowdfunding_id, String type, String url, String id_payment) {
         this.amount = amount;
         this.crowdfunding_id = crowdfunding_id;
         this.type = type;
         this.url = url;
+        this.id_payment = id_payment;
     }
 
     public PaymentResponse() {
@@ -46,5 +48,13 @@ public class PaymentResponse {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getId_payment() {
+        return id_payment;
+    }
+
+    public void setId_payment(String id_payment) {
+        this.id_payment = id_payment;
     }
 }

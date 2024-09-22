@@ -1,17 +1,17 @@
 package com.donate.donate_app.DTO;
 
-public class UsersDTO {
+public class LoginDTO {
     private String email;
     private String name;
-    private String auth_id;
+    private String password;
 
-    public UsersDTO(String email, String name, String auth_id) {
+    public LoginDTO(String email, String name, String password) {
         this.email = email;
         this.name = name;
-        this.auth_id = auth_id;
+        this.password = password;
     }
 
-    public UsersDTO() {
+    public LoginDTO() {
     }
 
     public String getEmail() {
@@ -30,11 +30,11 @@ public class UsersDTO {
         this.name = name;
     }
 
-    public String setAuth_id() {
-        return auth_id;
+    public String getPassword() {
+        return password;
     }
 
-    public void setAuth_id(String auth_id) {
-        this.auth_id = auth_id;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

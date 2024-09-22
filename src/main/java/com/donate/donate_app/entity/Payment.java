@@ -16,21 +16,23 @@ public class Payment {
     private Crowdfunding crowdfunding_id;
     private String type;
     private String url_payment;
+    private String id_payment;
 
-
-    public Payment(Long id, Integer amount, Crowdfunding crowdfunding_id, String type, String url_payment) {
+    public Payment(Long id, Integer amount, Crowdfunding crowdfunding_id, String type, String url_payment, String id_payment) {
         this.id = id;
         this.amount = amount;
         this.crowdfunding_id = crowdfunding_id;
         this.type = type;
         this.url_payment = url_payment;
+        this.id_payment = id_payment;
     }
 
-    public Payment(Integer amount, Crowdfunding crowdfunding_id, String type, String url_payment) {
+    public Payment(Integer amount, Crowdfunding crowdfunding_id, String type, String url_payment, String id_payment) {
         this.amount = amount;
         this.crowdfunding_id = crowdfunding_id;
         this.type = type;
         this.url_payment = url_payment;
+        this.id_payment = id_payment;
     }
 
     public Payment() {
@@ -74,5 +76,13 @@ public class Payment {
 
     public void setUrl_payment(String url_payment) {
         this.url_payment = url_payment;
+    }
+
+    public String getId_payment() {
+        return id_payment;
+    }
+
+    public void setId_payment(String id_payment) {
+        this.id_payment = id_payment;
     }
 }
