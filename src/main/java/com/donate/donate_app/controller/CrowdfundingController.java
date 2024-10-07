@@ -34,6 +34,7 @@ public class CrowdfundingController {
     @PostMapping
     public void createCrowdfunding(@RequestBody CrowdfundingDTO data, @RequestHeader String authorization) throws FirebaseAuthException {
         firebase.verifyFirebaseToken(authorization);
+        System.out.println("Autenticado");
         Crowdfunding crowdfunding = crowdfundingMapping.DtoToCrowdfunding(data);
         createCrowdfunding.CreateCrowdfunding(crowdfunding);
     }

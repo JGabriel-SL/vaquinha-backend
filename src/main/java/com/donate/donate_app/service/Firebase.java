@@ -37,6 +37,9 @@ public class Firebase {
     }
 
     public void verifyFirebaseToken(String token) throws FirebaseAuthException {
+        System.out.println("Verificou o token: " + token);
         FirebaseToken decodedToken = FirebaseAuth.getInstance().verifyIdToken(token);
+        System.out.println(decodedToken);
+
     }
 }

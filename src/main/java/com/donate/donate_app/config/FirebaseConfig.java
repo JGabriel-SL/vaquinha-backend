@@ -1,5 +1,6 @@
 package com.donate.donate_app.config;
 
+import com.donate.donate_app.util.Constraints;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
@@ -12,7 +13,7 @@ import java.io.IOException;
 public class FirebaseConfig {
     @Bean
     public FirebaseApp initializeFirebase() throws IOException {
-        FileInputStream serviceAccount = new FileInputStream("/Users/joaovitor/Documents/programação/donate-app/src/main/java/com/donate/donate_app/donate-app-33f84-firebase-adminsdk-p2cqc-6ba7742e65.json");
+        FileInputStream serviceAccount = new FileInputStream(Constraints.FIREBASE_AUTH_PATH);
 
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
