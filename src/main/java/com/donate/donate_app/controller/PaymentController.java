@@ -10,8 +10,7 @@ import com.donate.donate_app.response.PaymentResponse;
 import com.donate.donate_app.service.Firebase;
 import com.donate.donate_app.service.Stripe;
 import com.google.firebase.auth.FirebaseAuthException;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.stripe.model.checkout.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,13 +37,14 @@ public class PaymentController {
     public PaymentResponse createPayment(@RequestBody PaymentDTO data, @RequestHeader String authorization) throws FirebaseAuthException {
         firebase.verifyFirebaseToken(authorization);
         Crowdfunding crowdfunding = crowdfundingRepository.findById(data.getCrowdfunding_id()).orElseThrow();
-        JsonObject jsonObject = JsonParser.parseString(stripe.GeneratePaymentLink(crowdfunding.getDescription(),data.getAmount())).getAsJsonObject();
-        Payment newResponse = new Payment(data.getAmount(),crowdfunding,data.getType(),jsonObject.get("url").getAsString(), jsonObject.get("id").getAsString());
+        Session paymentSession = stripe.GeneratePaymentLink(crowdfunding.getDescription(),data.getAmount());
+        Payment newResponse = new Payment(data.getAmount(),crowdfunding,data.getType(),paymentSession.getUrl(), paymentSession.getId());
         paymentRepository.save(newResponse);
         PaymentResponse paymentResponse = paymentMapping.PaymentToResponse(newResponse);
         return paymentResponse;
 
     }
+
 
 
 }

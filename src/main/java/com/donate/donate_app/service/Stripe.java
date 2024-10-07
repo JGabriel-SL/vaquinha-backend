@@ -1,60 +1,47 @@
 package com.donate.donate_app.service;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import com.stripe.model.checkout.Session;
+import com.stripe.param.checkout.SessionCreateParams;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.util.Map;
 
 @Service
 public class Stripe {
 
-    @Autowired
-    FormDataForMap formDataForMap;
-
-    public String GeneratePaymentLink(String name ,Integer unit_amount){
+    public Session GeneratePaymentLink(String name, Integer unitAmount) {
         try {
-            // URL da API do Stripe
-            String url = "https://api.stripe.com/v1/checkout/sessions";
-
-            // Configuração da autenticação Basic com o API Key
-            String authValue = "Basic " + java.util.Base64.getEncoder()
-                    .encodeToString(("sk_test_51PrWJDEupnUDbsJNmVmKftVaP9Ythk2w5Gqbq6MRw26NQYsRa2uyIVYRl50qG9nO8mt5nPRSHwcN7jZ2DE8Xqbdb00uxWsVilO:").getBytes());
-
-            // Dados do corpo da requisição em form-urlencoded
-            String formData = formDataForMap.buildFormData(Map.of(
-                    "payment_method_types[]", "card",
-                    "line_items[][price_data][unit_amount]", String.format("%d",unit_amount),
-                    "line_items[][price_data][currency]", "brl",
-                    "line_items[][price_data][product_data][name]", String.format("%s",name),
-                    "line_items[][quantity]", "1",
-                    "mode", "payment",
-                    "success_url", "https://yourdomain.com/success"
-            ));
-
-            // Construção da requisição HTTP
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI(url))
-                    .header("Authorization", authValue)
-                    .header("Content-Type", "application/x-www-form-urlencoded")
-                    .POST(HttpRequest.BodyPublishers.ofString(formData))
+            // Criação dos parâmetros para a sessão de checkout
+            SessionCreateParams params = SessionCreateParams.builder()
+                    // Corrigido: Método correto para adicionar os tipos de métodos de pagamento
+                    .addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)
+                    .setMode(SessionCreateParams.Mode.PAYMENT) // Modo de pagamento (compra única)
+                    .setSuccessUrl("https://yourdomain.com/success") // URL de sucesso
+                    .setCancelUrl("https://yourdomain.com/cancel")  // URL de cancelamento
+                    .addLineItem(
+                            SessionCreateParams.LineItem.builder()
+                                    .setPriceData(
+                                            SessionCreateParams.LineItem.PriceData.builder()
+                                                    .setCurrency("brl") // Define a moeda como BRL
+                                                    .setUnitAmount(Long.valueOf(unitAmount)) // O valor em centavos
+                                                    .setProductData(
+                                                            SessionCreateParams.LineItem.PriceData.ProductData.builder()
+                                                                    .setName(name) // Define o nome do produto
+                                                                    .build()
+                                                    )
+                                                    .build()
+                                    )
+                                    .setQuantity(1L) // Quantidade de itens
+                                    .build()
+                    )
                     .build();
 
-            // Envio da requisição e obtenção da resposta
-            HttpClient client = HttpClient.newHttpClient();
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            // Criação da sessão de checkout
+            Session session = Session.create(params);
 
-            // Exibição da resposta
-            return response.body();
+            // Retorna a URL da sessão de checkout
+            return session;
 
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-        return "";
     }
-
 }
