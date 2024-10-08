@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "crowdfunding-f4d9e",
+  "private_key_id": "dbf2cd0e662e54849950b5142f1cff887940e06d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDEDz4odxtZawkp\nq2GmPaUXHD1/9Q22BR874ePMqTIztHP8lj7ykqee9/WpJuxoxuGxh27TvqZG0tml\nZ9lJmM6YBrLmZQfdoui676e+n57vDOUn9PYmrufZpIvMjcefX/fb1RyaydY1l1Un\n3QHiZwjj+zB/+LH3//QwCTFCHdbidpuUqXNNb8jnyv/30HZib+A+LYHo9xIZl6k0\n69j3b2ua33az7dC9lAHeQxgCp3A0ohId5DkH+/Z1tSf3sWgAa3Mcv+wj5M9aRqsU\n83oCHIJRVbQtp607HjUaE3TmcilS9IJEt3CrhUdzoMooqQH1dRI1oOF2hqZWrWHO\nKWhk6mm5AgMBAAECggEARof3RAZpM9dSMgfh9rSZhgFWTIiDWLZqAJhoY3GAymIC\nEd2ZIpnIrGMmoKYMiTr26W8/2vPsjHEA9ESyQgwzUjSiukihNkYLdGiPz39L5VKd\nw6yXut3UMZNE6Z8dr8ON/qshgbvXkGrzKwaSTXjklWOBlKAKoh2VooxECLWEXu5L\nWnzUpdRPFuoMOpA9HS0Ll9GS3sk8KGc9Ul/ZyWgpS7CSLPY/y3duAyPhgt42i4oU\nKDHOmrwhgDJU6PeLJUbiuXTN9Gh8SmgeIhQjOO7dJF5vHoNJYQSVc7CFXS3AighQ\nFxNGYkbk6eEHrAz+OexJr/oWbdX8kIqlk0MrFL9gUwKBgQD3Sc1DY8H5Losy1RGd\n65afGpQwTfL2yyK9mdCuyNKMdLyk4DWYuz2XTMUkSUHlbJnsSASZnHgyDsPMHyaQ\nY1pQ36cCUfnK1NFtyuxhsLTiolxXPLAyQ7lEw9RXtLZJXh9exNYyGi3QPclwmaTi\ntPR6Iqz7brNcEedPtFUgCaMpiwKBgQDK9224FaqQ0FZ89QFgsAbNTfSIGAaybMj0\nmcjzGyvuv50Z/DzxKt0WEYoQE++W9MhoWakmI1kdBLGN7owRaJw7zP2kztW+gMB8\nni6KMX3LqC5wO0ggOdeFYqnLxBSUP9qdhqbF55dgGHQz0eKM/I55oqt4MGt/OsP5\nSm2ekRN6SwKBgQCxQLVhGKBxfGtKhG+cQsI0SVjvRvBg9jpwrVBn+IrzIroVdKD2\nWUBMszqcR+Z0DORH+VdSxFVjjDHMnoeF97FFRwrvHtNuEB4OFOZbH86IpNiLr3Sc\nku6526TZOS9wZ4cU5wKh5yHvolpB29/UoOCcqz5S+4aU+EBVYW2jCUVrAQKBgBxP\nOKGFfB3owTd6oO+QfdJi/imBWGXIoJrlXE70SkNpvIrkUMe+l8m9NomZjkB68f0E\nDIDCS2qtveozDJxc//WjWPmE0/FXWgHHumwSDR673YZP7nZ4OuRi55YBSnGHGoIA\nRwCxlb6UipizvKq3i1PR6aLA9i1vz+fUhseoKpRTAoGBAOY8wBo8EfwbDjj+UFWt\nwLZMyeLnZrNwP/qqP1hnc1wYaE9c3lu6feZGGLFVZpQuBIm+1DQ9yLIGmvFDt9Qp\ngr0B55tvIM0DLRQz/tieU8fqxkwUNgMJSZLOlSxEhkidjDe2xdj67W2M/tr39+q5\nn67T+aaR7oayahe1WfNUo/ZC\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-jfmql@crowdfunding-f4d9e.iam.gserviceaccount.com",
+  "client_id": "116509786137847111218",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-jfmql%40crowdfunding-f4d9e.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

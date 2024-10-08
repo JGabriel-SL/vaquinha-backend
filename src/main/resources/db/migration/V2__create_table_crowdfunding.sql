@@ -1,4 +1,4 @@
-CREATE TABLE crowdfunding(
+CREATE TABLE IF NOT EXISTS crowdfunding(
 id SERIAL PRIMARY KEY,
 description TEXT NOT NULL,
 created_at TIMESTAMP NOT NULL,

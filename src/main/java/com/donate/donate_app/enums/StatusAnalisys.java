@@ -1,6 +1,6 @@
 package com.donate.donate_app.enums;
 
-public enum StatusAnalisy {
+public enum StatusAnalisys {
     open,
     closed,
     waiting

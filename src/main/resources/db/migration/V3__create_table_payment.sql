@@ -1,5 +1,6 @@
-CREATE TYPE type_payment AS ENUM('card', 'pix');
-CREATE TABLE payment(
+--CREATE TYPE type_payment AS ENUM('card', 'pix');
+
+CREATE TABLE IF NOT EXISTS payment(
 id SERIAL PRIMARY KEY,
 amount INTEGER NOT NULL,
 type type_payment,
