@@ -1,6 +1,6 @@
 package com.donate.donate_app.entity;
 
-import com.donate.donate_app.enums.StatusAnalisy;
+import com.donate.donate_app.enums.StatusAnalisys;
 import jakarta.persistence.*;
 
 @Entity
@@ -20,11 +20,13 @@ public class Analisys {
     private Users users_id;
 
     private String refuse_motive;
-    private StatusAnalisy status;
+
+    @Enumerated(EnumType.STRING)
+    private StatusAnalisys status;
 
     public Analisys() {}
 
-    public Analisys(Long id, Crowdfunding crowdfunding, Users users, String refuse_motive, StatusAnalisy status) {
+    public Analisys(Long id, Crowdfunding crowdfunding, Users users, String refuse_motive, StatusAnalisys status) {
         this.id = id;
         this.crowdfunding_id = crowdfunding;
         this.users_id = users;
@@ -32,7 +34,7 @@ public class Analisys {
         this.status = status;
     }
 
-    public Analisys(Crowdfunding crowdfunding, Users users, String refuse_motive, StatusAnalisy status) {
+    public Analisys(Crowdfunding crowdfunding, Users users, String refuse_motive, StatusAnalisys status) {
         this.crowdfunding_id = crowdfunding;
         this.users_id = users;
         this.refuse_motive = refuse_motive;
@@ -71,11 +73,11 @@ public class Analisys {
         this.id = id;
     }
 
-    public StatusAnalisy getStatus() {
+    public StatusAnalisys getStatus() {
         return status;
     }
 
-    public void setStatus(StatusAnalisy status) {
+    public void setStatus(StatusAnalisys status) {
         this.status = status;
     }
 }

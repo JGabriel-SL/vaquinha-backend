@@ -1,5 +1,5 @@
 package com.donate.donate_app.util;
 
 public class Constraints {
-    public static final String FIREBASE_AUTH_PATH = "/Users/joaovitor/Documents/programação/vaquinha-backend/src/main/java/com/donate/donate_app/donate-app-33f84-firebase-adminsdk-p2cqc-6ba7742e65.json";
+    public static final String FIREBASE_AUTH_PATH = "C:\\Users\\gabriel.lima\\Documents\\vaquinha-app\\vaquinha-backend\\src\\main\\java\\com\\donate\\donate_app\\crowdfunding-f4d9e-dbf2cd0e662e.json";
 }

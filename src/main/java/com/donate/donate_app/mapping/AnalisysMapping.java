@@ -4,6 +4,7 @@ import com.donate.donate_app.DTO.AnalisysDTO;
 import com.donate.donate_app.entity.Analisys;
 import com.donate.donate_app.entity.Crowdfunding;
 import com.donate.donate_app.entity.Users;
+import com.donate.donate_app.enums.StatusAnalisys;
 import com.donate.donate_app.repository.AnalisysRepository;
 import com.donate.donate_app.repository.CrowdfundingRepository;
 import com.donate.donate_app.repository.UsersRepository;
@@ -26,6 +27,6 @@ public class AnalisysMapping {
         Users user = usersRepository.findById(data.getUser_id()).orElseThrow();
         Crowdfunding crowdfunding = crowdfundingRepository.findById(data.getCrowdfunding_id()).orElseThrow();
 
-        return new Analisys(crowdfunding, user, data.getRefuse_motive(), data.getStatus());
+        return new Analisys(crowdfunding, user, data.getRefuse_motive(), StatusAnalisys.valueOf(data.getStatus()));
     }
 }

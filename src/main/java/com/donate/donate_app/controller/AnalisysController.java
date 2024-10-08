@@ -9,6 +9,8 @@ import com.google.firebase.auth.FirebaseAuthException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "api/crowdfunding/analisys")
 public class AnalisysController {
@@ -27,6 +29,18 @@ public class AnalisysController {
         firebase.verifyFirebaseToken(authorization);
         Analisys analisys = analisysMapping.AnalisysDTOToAnalisys(data);
         analisysService.CreateAnalisys(analisys);
+    }
 
+    @GetMapping
+    public List<Analisys> getAllAnalisys(@RequestHeader String authorization) throws FirebaseAuthException {
+        firebase.verifyFirebaseToken(authorization);
+        return analisysService.GetAnalisysWaiting();
+    }
+
+    @PutMapping
+    public void updateAnalisys(@RequestBody AnalisysDTO data, @RequestHeader String authorization) throws FirebaseAuthException {
+        firebase.verifyFirebaseToken(authorization);
+        Analisys analisys = analisysMapping.AnalisysDTOToAnalisys(data);
+        analisysService.UpdateAnalisys(analisys);
     }
 }
