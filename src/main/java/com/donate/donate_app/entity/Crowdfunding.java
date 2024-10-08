@@ -9,11 +9,17 @@ public class Crowdfunding {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String title;
+
+    @Enumerated(EnumType.STRING)
+    private String status;
+
     private String description;
     private OffsetDateTime created_at;
     @ManyToOne
     @JoinColumn(name = "users_id")
     private Users users_id;
+
     private Integer current_amount = 0;
     private Integer goal_amount;
 
@@ -83,5 +89,13 @@ public class Crowdfunding {
     public void setGoal_amount(Integer goal_amount) {
         this.goal_amount = goal_amount;
     }
+
+    public String getTitle() { return title; }
+
+    public void setTitle(String title) { this.title = title; }
+
+    public String getStatus() { return status; }
+
+    public void setStatus(String status) { this.status = status; }
 }
 

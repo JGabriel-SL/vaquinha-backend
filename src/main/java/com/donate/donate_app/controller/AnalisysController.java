@@ -32,7 +32,7 @@ public class AnalisysController {
     }
 
     @GetMapping
-    public List<Analisys> getAllAnalisys(@RequestHeader String authorization) throws FirebaseAuthException {
+    public List<Analisys> getAllAnalisysWaiting(@RequestHeader String authorization) throws FirebaseAuthException {
         firebase.verifyFirebaseToken(authorization);
         return analisysService.GetAnalisysWaiting();
     }
