@@ -19,7 +19,7 @@ public class AnalisysService {
     }
 
     public List<Analisys> GetAnalisysWaiting(){
-        return analisysRepository.findAnalisysByStatus(StatusAnalisys.waiting);
+        return analisysRepository.findAnalisysByStatus(StatusAnalisys.WAITING);
     }
 
     public void UpdateAnalisys(Analisys data){
