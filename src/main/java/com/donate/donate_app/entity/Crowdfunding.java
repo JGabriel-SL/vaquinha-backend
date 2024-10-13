@@ -1,4 +1,5 @@
 package com.donate.donate_app.entity;
+import com.donate.donate_app.enums.StatusCrowdfunding;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -12,7 +13,7 @@ public class Crowdfunding {
     private String title;
 
     @Enumerated(EnumType.STRING)
-    private String status;
+    private StatusCrowdfunding status;
 
     private String description;
     private OffsetDateTime created_at;
@@ -94,8 +95,8 @@ public class Crowdfunding {
 
     public void setTitle(String title) { this.title = title; }
 
-    public String getStatus() { return status; }
+    public StatusCrowdfunding getStatus() { return status; }
 
-    public void setStatus(String status) { this.status = status; }
+    public void setStatus(StatusCrowdfunding status) { this.status = status; }
 }
 
