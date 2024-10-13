@@ -3,6 +3,7 @@ package com.donate.donate_app.DTO;
 
 public class AnalisysDTO {
 
+    private Long id;
     private Long crowdfunding_id;
     private Long user_id;
     private String refuse_motive;
@@ -10,11 +11,27 @@ public class AnalisysDTO {
 
     public AnalisysDTO() {}
 
+    public AnalisysDTO(Long id, Long crowdfunding_id, Long user_id, String refuse_motive, String status) {
+        this.id = id;
+        this.crowdfunding_id = crowdfunding_id;
+        this.user_id = user_id;
+        this.refuse_motive = refuse_motive;
+        this.status = status;
+    }
+
     public AnalisysDTO(Long crowdfunding_id, Long user_id, String refuse_motive, String status) {
         this.crowdfunding_id = crowdfunding_id;
         this.user_id = user_id;
         this.refuse_motive = refuse_motive;
         this.status = status;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getCrowdfunding_id() {
