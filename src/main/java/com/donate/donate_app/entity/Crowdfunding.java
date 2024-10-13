@@ -1,7 +1,6 @@
 package com.donate.donate_app.entity;
 import com.donate.donate_app.enums.StatusCrowdfunding;
 import jakarta.persistence.*;
-import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
 @Entity
@@ -24,23 +23,26 @@ public class Crowdfunding {
     private Integer current_amount = 0;
     private Integer goal_amount;
 
-    public Crowdfunding(Long id, String description, OffsetDateTime created_at, Users users_id, Integer current_amount, Integer goal_amount) {
+    public Crowdfunding(Long id, String description, OffsetDateTime created_at, Users users_id, Integer current_amount, Integer goal_amount, StatusCrowdfunding status, String title) {
         this.id = id;
         this.description = description;
         this.created_at = created_at;
         this.users_id = users_id;
         this.current_amount = current_amount;
         this.goal_amount = goal_amount;
+        this.status = status;
+        this.title = title;
     }
 
     public Crowdfunding() {
 
     }
-    public Crowdfunding(String description, Users users_id, Integer goal_amount) {
+    public Crowdfunding(String description, Users users_id, Integer goal_amount, String title) {
         this.description = description;
         this.created_at = OffsetDateTime.now();
         this.users_id = users_id;
         this.goal_amount = goal_amount;
+        this.title = title;
     }
 
     public Long getId() {
