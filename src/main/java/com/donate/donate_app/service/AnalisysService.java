@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.donate.donate_app.entity.Analisys;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -35,7 +34,7 @@ public class AnalisysService {
             old_data.setStatus(data.getStatus());
             analisysRepository.save(old_data);
         } else {
-            System.out.println("Usuario não encontrado!");
+            System.out.println("Usuário não encontrado!");
         }
         return analisysMapping.AnalisysResponse(old_data);
     }
