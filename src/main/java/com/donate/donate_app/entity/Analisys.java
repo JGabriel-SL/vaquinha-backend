@@ -1,7 +1,6 @@
 package com.donate.donate_app.entity;
 
 import com.donate.donate_app.enums.StatusAnalisys;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
 import jakarta.persistence.*;
 
 @Entity
@@ -23,7 +22,6 @@ public class Analisys {
     private String refuse_motive;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status")
     private StatusAnalisys status;
 
     public Analisys() {}
@@ -75,8 +73,8 @@ public class Analisys {
         this.id = id;
     }
 
-    public String getStatus() {
-        return status.toString();
+    public StatusAnalisys getStatus() {
+        return status;
     }
 
     public void setStatus(StatusAnalisys status) {

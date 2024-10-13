@@ -1,6 +1,7 @@
 package com.donate.donate_app.controller;
 import com.donate.donate_app.DTO.CrowdfundingDTO;
 import com.donate.donate_app.entity.Crowdfunding;
+import com.donate.donate_app.enums.StatusCrowdfunding;
 import com.donate.donate_app.mapping.CrowdfundingMapping;
 import com.donate.donate_app.response.CrowdfundingResponse;
 import com.donate.donate_app.service.CreateCrowdfunding;
@@ -35,6 +36,7 @@ public class CrowdfundingController {
     public CrowdfundingResponse createCrowdfunding(@RequestBody CrowdfundingDTO data, @RequestHeader String authorization) throws FirebaseAuthException {
         firebase.verifyFirebaseToken(authorization);
         Crowdfunding crowdfunding = crowdfundingMapping.DtoToCrowdfunding(data);
+        crowdfunding.setStatus(StatusCrowdfunding.WAITING);
         return createCrowdfunding.CreateCrowdfunding(crowdfunding);
     }
 

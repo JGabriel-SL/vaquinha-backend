@@ -22,8 +22,7 @@ public class CrowdfundingMapping {
         if (data.getGoal_amount()!=null){
             goal_amount = data.getGoal_amount();
         }
-        Crowdfunding crowdfunding = new Crowdfunding(data.getDescription(), users, goal_amount);
-        return crowdfunding;
+        return new Crowdfunding(data.getDescription(), users, goal_amount, data.getTitle());
     }
 
     public CrowdfundingResponse CrowdfundingToResponse(Crowdfunding data){

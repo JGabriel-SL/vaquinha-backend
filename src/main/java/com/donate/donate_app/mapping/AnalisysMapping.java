@@ -8,6 +8,7 @@ import com.donate.donate_app.enums.StatusAnalisys;
 import com.donate.donate_app.repository.AnalisysRepository;
 import com.donate.donate_app.repository.CrowdfundingRepository;
 import com.donate.donate_app.repository.UsersRepository;
+import com.donate.donate_app.response.AnalisysResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,6 +27,12 @@ public class AnalisysMapping {
     public Analisys AnalisysDTOToAnalisys(AnalisysDTO data) {
         Users user = usersRepository.findById(data.getUser_id()).orElseThrow();
         Crowdfunding crowdfunding = crowdfundingRepository.findById(data.getCrowdfunding_id()).orElseThrow();
-        return new Analisys(crowdfunding, user, data.getRefuse_motive(), StatusAnalisys.open);
+
+        return new Analisys(crowdfunding, user, data.getRefuse_motive(), StatusAnalisys.valueOf(data.getStatus()));
     }
+
+    public AnalisysResponse AnalisysResponse(Analisys data) {
+        return new AnalisysResponse(data);
+    }
+
 }
