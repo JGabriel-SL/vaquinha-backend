@@ -3,6 +3,7 @@ package com.donate.donate_app.controller;
 import com.donate.donate_app.DTO.AnalisysDTO;
 import com.donate.donate_app.entity.Analisys;
 import com.donate.donate_app.mapping.AnalisysMapping;
+import com.donate.donate_app.response.AnalisysResponse;
 import com.donate.donate_app.service.AnalisysService;
 import com.donate.donate_app.service.Firebase;
 import com.google.firebase.auth.FirebaseAuthException;
@@ -32,15 +33,15 @@ public class AnalisysController {
     }
 
     @GetMapping
-    public List<Analisys> getAllAnalisysWaiting(@RequestHeader String authorization) throws FirebaseAuthException {
+    public List<AnalisysResponse> getAllAnalisysWaiting(@RequestHeader String authorization) throws FirebaseAuthException {
         firebase.verifyFirebaseToken(authorization);
         return analisysService.GetAnalisysWaiting();
     }
 
     @PutMapping
-    public void updateAnalisys(@RequestBody AnalisysDTO data, @RequestHeader String authorization) throws FirebaseAuthException {
+    public AnalisysResponse updateAnalisys(@RequestBody AnalisysDTO data, @RequestHeader String authorization) throws FirebaseAuthException {
         firebase.verifyFirebaseToken(authorization);
-        Analisys analisys = analisysMapping.AnalisysDTOToAnalisys(data);
-        analisysService.UpdateAnalisys(analisys);
+        Analisys analisys = analisysMapping.AnalisysDTOToAnalisysUpdate(data);
+        return analisysService.UpdateAnalisys(analisys);
     }
 }

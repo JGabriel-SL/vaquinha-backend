@@ -41,6 +41,11 @@ public class Analisys {
         this.status = status;
     }
 
+    public Analisys(Long id, String status) {
+        this.id = id;
+        this.status = StatusAnalisys.valueOf(status);
+    }
+
     public String getRefuse_motive() {
         return refuse_motive;
     }

@@ -11,6 +11,7 @@ public class AnalisysResponse {
     private String user_name;
     private Long user_id;
     private StatusAnalisys status;
+    private String refuse_motive;
 
     public AnalisysResponse() {}
 
@@ -19,6 +20,17 @@ public class AnalisysResponse {
         this.crowdfunding_title = analisys.getCrowdfunding_id().getTitle();
         this.crowdfunding_id = analisys.getCrowdfunding_id().getId();
         this.user_name = analisys.getUsers_id().getName();
+        this.user_id = analisys.getUsers_id().getId();
+        this.status = analisys.getStatus();
+        this.refuse_motive = analisys.getRefuse_motive();
+    }
+
+    public String getRefuse_motive() {
+        return refuse_motive;
+    }
+
+    public void setRefuse_motive(String refuse_motive) {
+        this.refuse_motive = refuse_motive;
     }
 
     public Long getId() {
