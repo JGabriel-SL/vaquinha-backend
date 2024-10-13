@@ -24,5 +24,6 @@ public class AnalisysService {
 
     public void UpdateAnalisys(Analisys data){
         analisysRepository.save(data);
+        System.out.println("salvou");
     }
 }
