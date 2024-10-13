@@ -1,13 +1,17 @@
 package com.donate.donate_app.controller;
+import com.donate.donate_app.DTO.AnalisysDTO;
 import com.donate.donate_app.DTO.CrowdfundingDTO;
+import com.donate.donate_app.DTO.RequestAIDTO;
+import com.donate.donate_app.DTO.RequestLoginAIDTO;
+import com.donate.donate_app.entity.Analisys;
 import com.donate.donate_app.entity.Crowdfunding;
 import com.donate.donate_app.enums.StatusCrowdfunding;
+import com.donate.donate_app.mapping.AnalisysMapping;
+import com.donate.donate_app.mapping.ArtificialintelligenceMapping;
 import com.donate.donate_app.mapping.CrowdfundingMapping;
+import com.donate.donate_app.response.AIValidationResponse;
 import com.donate.donate_app.response.CrowdfundingResponse;
-import com.donate.donate_app.service.CreateCrowdfunding;
-import com.donate.donate_app.service.Firebase;
-import com.donate.donate_app.service.SearchCrowdfunding;
-import com.donate.donate_app.service.SearchUsers;
+import com.donate.donate_app.service.*;
 import com.google.firebase.auth.FirebaseAuthException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +25,12 @@ public class CrowdfundingController {
     CrowdfundingMapping crowdfundingMapping;
 
     @Autowired
+    AnalisysMapping analisysMapping;
+
+    @Autowired
+    ArtificialintelligenceMapping artificialintelligenceMapping;
+
+    @Autowired
     CreateCrowdfunding createCrowdfunding;
 
     @Autowired
@@ -30,14 +40,36 @@ public class CrowdfundingController {
     SearchUsers searchUsers;
 
     @Autowired
+    ArtificialIntelligenceService artificialIntelligenceService;
+
+    @Autowired
+    AnalisysService analisysService;
+
+    @Autowired
     Firebase firebase;
 
     @PostMapping
     public CrowdfundingResponse createCrowdfunding(@RequestBody CrowdfundingDTO data, @RequestHeader String authorization) throws FirebaseAuthException {
         firebase.verifyFirebaseToken(authorization);
+
+        RequestLoginAIDTO requestLoginAIDTO = new RequestLoginAIDTO("gab123", "gab123");
+        String token = artificialIntelligenceService.login(requestLoginAIDTO);
+
+        RequestAIDTO request = artificialintelligenceMapping.crowdfundingToRequestAIDTO(data);
+        AIValidationResponse response = artificialIntelligenceService.validateCrowdfunding(request, token);
+
         Crowdfunding crowdfunding = crowdfundingMapping.DtoToCrowdfunding(data);
-        crowdfunding.setStatus(StatusCrowdfunding.WAITING);
-        return createCrowdfunding.CreateCrowdfunding(crowdfunding);
+        crowdfunding.setStatus(artificialIntelligenceService.getCrowdfundingStatus(response));
+
+        CrowdfundingResponse crowdfundingResponse = createCrowdfunding.CreateCrowdfunding(crowdfunding);
+
+        if ("N".equals(response.getValidate())) {
+            AnalisysDTO analisysDTO = new AnalisysDTO(crowdfundingResponse.getId(), data.getUsers_id(), response.getMotive(), "WAITING");
+            Analisys analisys = analisysMapping.AnalisysDTOToAnalisys(analisysDTO);
+            analisysService.CreateAnalisys(analisys);
+        }
+
+        return crowdfundingResponse;
     }
 
     @GetMapping
