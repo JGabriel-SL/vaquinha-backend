@@ -25,12 +25,6 @@ public class CrowdfundingController {
     CrowdfundingMapping crowdfundingMapping;
 
     @Autowired
-    AnalisysMapping analisysMapping;
-
-    @Autowired
-    ArtificialintelligenceMapping artificialintelligenceMapping;
-
-    @Autowired
     CreateCrowdfunding createCrowdfunding;
 
     @Autowired
@@ -43,31 +37,19 @@ public class CrowdfundingController {
     ArtificialIntelligenceService artificialIntelligenceService;
 
     @Autowired
-    AnalisysService analisysService;
-
-    @Autowired
     Firebase firebase;
 
     @PostMapping
     public CrowdfundingResponse createCrowdfunding(@RequestBody CrowdfundingDTO data, @RequestHeader String authorization) throws FirebaseAuthException {
         firebase.verifyFirebaseToken(authorization);
 
-        RequestLoginAIDTO requestLoginAIDTO = new RequestLoginAIDTO("gab123", "gab123");
-        String token = artificialIntelligenceService.login(requestLoginAIDTO);
-
-        RequestAIDTO request = artificialintelligenceMapping.crowdfundingToRequestAIDTO(data);
-        AIValidationResponse response = artificialIntelligenceService.validateCrowdfunding(request, token);
+        AIValidationResponse response = artificialIntelligenceService.doAIRequest(data);
 
         Crowdfunding crowdfunding = crowdfundingMapping.DtoToCrowdfunding(data);
         crowdfunding.setStatus(artificialIntelligenceService.getCrowdfundingStatus(response));
-
         CrowdfundingResponse crowdfundingResponse = createCrowdfunding.CreateCrowdfunding(crowdfunding);
 
-        if ("N".equals(response.getValidate())) {
-            AnalisysDTO analisysDTO = new AnalisysDTO(crowdfundingResponse.getId(), data.getUsers_id(), response.getMotive(), "WAITING");
-            Analisys analisys = analisysMapping.AnalisysDTOToAnalisys(analisysDTO);
-            analisysService.CreateAnalisys(analisys);
-        }
+        artificialIntelligenceService.createAnalisys(response, crowdfundingResponse.getId(), data.getUsers_id());
 
         return crowdfundingResponse;
     }
