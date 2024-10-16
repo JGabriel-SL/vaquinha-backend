@@ -22,10 +22,10 @@ public class Crowdfunding {
     @JoinColumn(name = "users_id")
     private Users users_id;
 
-    private BigDecimal current_amount = BigDecimal.ZERO;
-    private BigDecimal goal_amount;
+    private Integer current_amount = 0;
+    private Integer goal_amount;
 
-    public Crowdfunding(Long id, String description, OffsetDateTime created_at, Users users_id, BigDecimal current_amount, BigDecimal goal_amount, StatusCrowdfunding status, String title) {
+    public Crowdfunding(Long id, String description, OffsetDateTime created_at, Users users_id, Integer current_amount, Integer goal_amount, StatusCrowdfunding status, String title) {
         this.id = id;
         this.description = description;
         this.created_at = created_at;
@@ -39,7 +39,7 @@ public class Crowdfunding {
     public Crowdfunding() {
 
     }
-    public Crowdfunding(String description, Users users_id, BigDecimal goal_amount, String title) {
+    public Crowdfunding(String description, Users users_id, Integer goal_amount, String title) {
         this.description = description;
         this.created_at = OffsetDateTime.now();
         this.users_id = users_id;
@@ -79,19 +79,19 @@ public class Crowdfunding {
         this.users_id = users_id;
     }
 
-    public BigDecimal getCurrent_amount() {
+    public Integer getCurrent_amount() {
         return current_amount;
     }
 
-    public void setCurrent_amount(BigDecimal current_amount) {
+    public void setCurrent_amount(Integer current_amount) {
         this.current_amount = current_amount;
     }
 
-    public BigDecimal getGoal_amount() {
+    public Integer getGoal_amount() {
         return goal_amount;
     }
 
-    public void setGoal_amount(BigDecimal goal_amount) {
+    public void setGoal_amount(Integer goal_amount) {
         this.goal_amount = goal_amount;
     }
 

@@ -19,7 +19,7 @@ public class CrowdfundingMapping {
 
     public Crowdfunding DtoToCrowdfunding(CrowdfundingDTO data){
         Users users = usersRepository.findById(data.getUsers_id()).orElseThrow();
-        BigDecimal goal_amount = BigDecimal.ZERO;
+        Integer goal_amount = 0;
         if (data.getGoal_amount()!=null){
             goal_amount = data.getGoal_amount();
         }

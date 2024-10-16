@@ -1,7 +1,9 @@
 package com.donate.donate_app.service;
 
 import com.donate.donate_app.DTO.WebhookDTO;
+import com.donate.donate_app.entity.Crowdfunding;
 import com.donate.donate_app.entity.Payment;
+import com.donate.donate_app.repository.CrowdfundingRepository;
 import com.donate.donate_app.repository.PaymentRepository;
 import com.donate.donate_app.util.Constraints;
 import com.stripe.model.Event;
@@ -16,6 +18,9 @@ public class WebhookPayment {
     @Autowired
     PaymentRepository paymentRepository;
 
+    @Autowired
+    CrowdfundingRepository crowdfundingRepository;
+
     public void updatePaymentComplete(WebhookDTO webhookDTO){
 
         Event event = null;
@@ -29,6 +34,9 @@ public class WebhookPayment {
         Session session = (Session) event.getDataObjectDeserializer().getObject().orElse(null);
         System.out.println(session.getId());
         Payment payment = paymentRepository.findByIdPayment(session.getId());
+        Crowdfunding crowdfunding = crowdfundingRepository.findById(payment.getCrowdfunding_id().getId()).orElseThrow();
+        crowdfunding.setCurrent_amount(crowdfunding.getCurrent_amount()+payment.getAmount());
+
 
 
 

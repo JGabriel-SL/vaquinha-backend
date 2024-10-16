@@ -10,11 +10,11 @@ public class CrowdfundingResponse {
     private Long id;
     private String description;
     private OffsetDateTime created_at;
-    private BigDecimal current_amount;
-    private BigDecimal goal_amount;
+    private Integer current_amount;
+    private Integer goal_amount;
     private StatusCrowdfunding status;
 
-    public CrowdfundingResponse(Long id, String description, OffsetDateTime created_at, BigDecimal current_amount, BigDecimal goal_amount, StatusCrowdfunding status) {
+    public CrowdfundingResponse(Long id, String description, OffsetDateTime created_at, Integer current_amount, Integer goal_amount, StatusCrowdfunding status) {
         this.id = id;
         this.description = description;
         this.created_at = created_at;
@@ -58,19 +58,19 @@ public class CrowdfundingResponse {
         this.created_at = created_at;
     }
 
-    public BigDecimal getCurrent_amount() {
+    public Integer getCurrent_amount() {
         return current_amount;
     }
 
-    public void setCurrent_amount(BigDecimal current_amount) {
+    public void setCurrent_amount(Integer current_amount) {
         this.current_amount = current_amount;
     }
 
-    public BigDecimal getGoal_amount() {
+    public Integer getGoal_amount() {
         return goal_amount;
     }
 
-    public void setGoal_amount(BigDecimal goal_amount) {
+    public void setGoal_amount(Integer goal_amount) {
         this.goal_amount = goal_amount;
     }
 }
