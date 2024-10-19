@@ -4,6 +4,13 @@ public class AIValidationResponse {
     private String motive;
     private String validate;
 
+    public AIValidationResponse() {}
+
+    public AIValidationResponse(String motive, String validate) {
+        this.motive = motive;
+        this.validate = validate;
+    }
+
     public String getMotive() {
         return motive;
     }

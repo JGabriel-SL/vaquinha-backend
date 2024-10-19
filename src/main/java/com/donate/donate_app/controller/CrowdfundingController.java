@@ -49,6 +49,7 @@ public class CrowdfundingController {
         crowdfunding.setStatus(artificialIntelligenceService.getCrowdfundingStatus(response));
         CrowdfundingResponse crowdfundingResponse = createCrowdfunding.CreateCrowdfunding(crowdfunding);
 
+
         artificialIntelligenceService.createAnalisys(response, crowdfundingResponse.getId(), data.getUsers_id());
 
         return crowdfundingResponse;

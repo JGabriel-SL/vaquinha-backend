@@ -10,10 +10,15 @@ import com.donate.donate_app.mapping.ArtificialintelligenceMapping;
 import com.donate.donate_app.response.AILoginResponse;
 import com.donate.donate_app.response.AIValidationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
 import com.donate.donate_app.DTO.RequestAIDTO;
+
+import java.net.ConnectException;
+import java.util.concurrent.TimeoutException;
 
 @Service
 public class ArtificialIntelligenceService {
@@ -41,7 +46,21 @@ public class ArtificialIntelligenceService {
                 .uri("/login")
                 .body(Mono.just(requestLoginAIDTO), RequestLoginAIDTO.class)
                 .retrieve()
+                .onStatus(HttpStatusCode::isError, clientResponse -> {
+                    return Mono.error(new RuntimeException(("Error: Failed to connection to AI")));
+                })
                 .bodyToMono(AILoginResponse.class)
+                .onErrorResume(throwable -> {
+                    switch (throwable) {
+                        case WebClientResponseException webClientResponseException ->
+                                System.err.println("Error HTTP Request: " + webClientResponseException.getStatusCode());
+                        case TimeoutException timeoutException ->
+                                System.err.println("Error: TimeOut");
+                        case ConnectException connectException -> System.err.println("Error: Connection refused");
+                        case null, default -> System.err.println("Unknown Error: " + throwable.getMessage());
+                    }
+                    return Mono.justOrEmpty(null);
+                })
                 .block();
 
         return obj != null ? obj.getAccess_token() : null;
@@ -62,7 +81,11 @@ public class ArtificialIntelligenceService {
         RequestAIDTO requestAIDTO = createAIRequest(data);
         String token = login();
 
-        return validateCrowdfunding(requestAIDTO, token);
+        if (token != null) {
+            return validateCrowdfunding(requestAIDTO, token);
+        } else {
+            return noConnectionIAResponse();
+        }
     }
 
     public RequestAIDTO createAIRequest(CrowdfundingDTO data) {
@@ -74,6 +97,10 @@ public class ArtificialIntelligenceService {
             return StatusCrowdfunding.WAITING;
         }
         return StatusCrowdfunding.OPEN;
+    }
+
+    public AIValidationResponse noConnectionIAResponse() {
+        return new AIValidationResponse("Error : No Connection to AI", "N");
     }
 
     public void createAnalisys(AIValidationResponse response, Long crowdfunding_id, Long user_id) {
