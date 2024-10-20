@@ -1,6 +1,7 @@
 package com.donate.donate_app.service;
 
 import com.donate.donate_app.DTO.WebhookDTO;
+import com.donate.donate_app.config.EnvironmentManager;
 import com.donate.donate_app.entity.Crowdfunding;
 import com.donate.donate_app.entity.Payment;
 import com.donate.donate_app.repository.CrowdfundingRepository;
@@ -26,7 +27,7 @@ public class WebhookPayment {
         Event event = null;
         try {
             event = Webhook.constructEvent(
-                    webhookDTO.getPayload(), webhookDTO.getSignature(), Constraints.STRIPE_WEBHOOK_SECRET
+                    webhookDTO.getPayload(), webhookDTO.getSignature(), EnvironmentManager.getInstance().getEnv("STRIPE_WEBHOOK_SECRET")
             );
         } catch (Exception e) {
             System.out.println("Error");
@@ -34,8 +35,12 @@ public class WebhookPayment {
         Session session = (Session) event.getDataObjectDeserializer().getObject().orElse(null);
         System.out.println(session.getId());
         Payment payment = paymentRepository.findByIdPayment(session.getId());
+        System.out.println(payment);
         Crowdfunding crowdfunding = crowdfundingRepository.findById(payment.getCrowdfunding_id().getId()).orElseThrow();
+        System.out.println(crowdfunding.getId());
         crowdfunding.setCurrent_amount(crowdfunding.getCurrent_amount()+payment.getAmount());
+        System.out.println(crowdfunding.getCurrent_amount());
+        crowdfundingRepository.save(crowdfunding);
 
 
 
