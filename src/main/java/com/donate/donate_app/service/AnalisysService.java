@@ -30,7 +30,6 @@ public class AnalisysService {
 
     public AnalisysResponse UpdateAnalisys(Analisys data){
         Analisys old_data = analisysRepository.findById(data.getId()).orElse(null);
-        System.out.println(old_data);
         if (old_data != null){
             old_data.setStatus(data.getStatus());
             analisysRepository.save(old_data);

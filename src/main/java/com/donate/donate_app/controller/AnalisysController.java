@@ -2,9 +2,11 @@ package com.donate.donate_app.controller;
 
 import com.donate.donate_app.DTO.AnalisysDTO;
 import com.donate.donate_app.entity.Analisys;
+import com.donate.donate_app.entity.Crowdfunding;
 import com.donate.donate_app.mapping.AnalisysMapping;
 import com.donate.donate_app.response.AnalisysResponse;
 import com.donate.donate_app.service.AnalisysService;
+import com.donate.donate_app.service.CreateCrowdfunding;
 import com.donate.donate_app.service.Firebase;
 import com.google.firebase.auth.FirebaseAuthException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,8 @@ public class AnalisysController {
 
     @Autowired
     Firebase firebase;
+    @Autowired
+    private CreateCrowdfunding createCrowdfunding;
 
     @PostMapping
     public void createAnalisys(@RequestBody AnalisysDTO data, @RequestHeader String authorization) throws FirebaseAuthException {
@@ -42,6 +46,9 @@ public class AnalisysController {
     public AnalisysResponse updateAnalisys(@RequestBody AnalisysDTO data, @RequestHeader String authorization) throws FirebaseAuthException {
         firebase.verifyFirebaseToken(authorization);
         Analisys analisys = analisysMapping.AnalisysDTOToAnalisysUpdate(data);
+        Crowdfunding crowdfunding = new Crowdfunding();
+        createCrowdfunding.updateCrowdfunding(crowdfunding);
+
         return analisysService.UpdateAnalisys(analisys);
     }
 }
